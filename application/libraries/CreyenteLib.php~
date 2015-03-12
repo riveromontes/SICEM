@@ -1,0 +1,105 @@
+<?php if (!defined('BASEPATH')) exit('No permitir el acceso directo al script');
+
+// Validaciones para el modelo de usuarios (login, cambio clave, CRUD Usuario)
+class CreyenteLib {
+
+	function __construct() {
+		$this->CI = & get_instance(); // Esto para acceder a la instancia que carga la librería
+
+		$this->CI->load->model('Model_Creyente');
+		
+		//$arreglo_si_no = array('Seleccionar', 'Sí', 'No');
+
+       		 //$this->CI->load->model('Model_Perfil');
+   	 }
+
+    /*public function login($user, $pass) {
+    	$query = $this->CI->Model_Usuario->get_login($user, $pass);
+    	if($query->num_rows() > 0) {
+    		$usuario = $query->row();
+            $perfil = $this->CI->Model_Perfil->find($usuario->perfil_id);
+
+    		$datosSession = array('usuario' => $usuario->name,
+    			                  'usuario_id' => $usuario->id,
+    			                  'perfil_id' => $usuario->perfil_id,
+                                  'perfil_name' => $perfil->name);
+    		$this->CI->session->set_userdata($datosSession);
+    		return TRUE;
+    	}
+    	else {
+    		$this->CI->session->sess_destroy();
+    		return FALSE;
+    	}
+    }*/
+
+    /*public function cambiarPWD($act, $new) {
+    	if($this->CI->session->userdata('usuario_id') == null) {
+    		return FALSE;
+    	}
+
+    	$id = $this->CI->session->userdata('usuario_id');
+    	$usuario = $this->CI->Model_Usuario->find($id);
+
+    	if($usuario->password == $act) {
+    		$data = array('id' => $id,
+               			  'password' => $new);
+    		$this->CI->Model_Usuario->update($data);
+    	}
+    	else {
+    		return FALSE;
+    	}
+    }*/
+
+    
+    public function validar_ciudad($registro) {
+
+        if ($registro['ciudad'] == 0) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+    }
+
+    public function validar_nacionalidad($registro) {
+
+        if ($registro['nacionalidad'] == 'Se') {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+    }
+
+    public function validar_sexo($registro) {
+
+        if ($registro['sexo'] == 'Se') {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+    }
+
+    public function validar_asiste_celula($registro) {
+
+        if ($registro['asiste_celula'] == 'Se') {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+    }
+
+    public function validar_es_nuevo_creyente($registro) {
+
+        if ($registro['es_nuevo_creyente'] == 'Se') {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+    }
+
+
+}
